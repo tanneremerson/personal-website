@@ -13,18 +13,7 @@ function getEventBody(event) {
   return parsedBody.aspect_type === "create" ? parsedBody : null;
 }
 
-exports.handler = async (event, context) => {
-  console.log({ msg: "Event/Context data", event, context });
-
-  const eventBody = getEventBody(event);
-  if (!eventBody) {
-    console.log({ msg: "Incorrect action type, returning early" });
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ success: true }),
-    };
-  }
-
+async function publishToQueue(eventBody) {
   const sqs = new AWS.SQS();
 
   const params = {
@@ -49,4 +38,23 @@ exports.handler = async (event, context) => {
         body: JSON.stringify({ success: false }),
       };
     });
+}
+
+async function processEvent(event) {
+  const eventBody = getEventBody(event);
+  if (!eventBody) {
+    console.log({ msg: "Incorrect action type, returning early" });
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ success: true }),
+    };
+  }
+
+  return publishToQueue(eventBody);
+}
+
+exports.handler = async (event, context) => {
+  console.log({ msg: "Event/Context data", event, context });
+
+  return processEvent(event);
 };

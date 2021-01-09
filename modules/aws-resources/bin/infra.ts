@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import * as cdk from "@aws-cdk/core";
-import { StravaWebhook } from "../lib/strava-webhook-stack";
+import { StravaWebhookStack } from "../lib/strava-webhook-stack";
 
 const app = new cdk.App();
-new StravaWebhook(app, "StravaWebhook");
+new StravaWebhookStack(app, "StravaWebhookStack");
