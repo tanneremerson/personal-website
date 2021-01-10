@@ -1,5 +1,13 @@
 # Personal Website
 
+## Status JAN-09-2020
+- Updated the CDK code to generate a dynamic verify token when creating the webhook. The token
+  is then added to the lambda as an environment variable when deployed to verify the webhook.
+- Created bootstrapping scripts to spin up and tear down the environment. This will create the
+  webhook once the infra is up or delete it when tearing it down.
+- Finish bootstrapping scripts to save the webhook or read on tear down. All webhooks should be
+  removed before tearing down API Gateway.
+
 ## Status JAN-03-2020
 - Created a basic pipeline to process Strava webhooks. All infra is created in using the AWS
   CDK and can be built and torn down with the commands `cdk deploy` and `cdk destroy`. Still
@@ -35,5 +43,7 @@ continue to grow. My current goals are to support the following features:
 
 ## Technologies
 
+- AWS
+  - CDK
 - Node.js
 - Next.js
