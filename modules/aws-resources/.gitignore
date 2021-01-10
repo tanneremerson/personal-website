@@ -4,6 +4,9 @@
 node_modules
 package-lock.json
 .env
+# Used to bootstrap environment parameters
+parameters.*.sh
+
 
 # CDK asset staging directory
 .cdk.staging

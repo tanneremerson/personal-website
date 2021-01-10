@@ -1,15 +1,29 @@
-# Welcome to your CDK TypeScript project!
+# AWS Infrastructure
 
-You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`InfraStack`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+This module contains scripts to provision and destroy infrastructure in AWS.
+In addition, contains code for each of the lambdas that are provisioned in the `./lambda`
+directory.
+
+## Spinning up new environment
+
+To provision the environment and setup the Strava webhook
+
+```sh
+./bootstrap/up.js
+```
+
+## Tearing down environment
+
+To tear down the environment, run the down script
+
+```sh
+./bootstrap/down.js
+```
+
+## Useful CDK Information
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
-## Useful commands
-
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
  * `cdk deploy`      deploy this stack to your default AWS account/region
  * `cdk diff`        compare deployed stack with current state
  * `cdk synth`       emits the synthesized CloudFormation template

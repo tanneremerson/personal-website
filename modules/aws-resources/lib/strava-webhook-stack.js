@@ -1,11 +1,12 @@
-import * as apigateway from "@aws-cdk/aws-apigateway";
-import * as lambda from "@aws-cdk/aws-lambda";
-import * as lambdaEventSource from "@aws-cdk/aws-lambda-event-sources";
-import * as sqs from "@aws-cdk/aws-sqs";
-import * as ssm from "@aws-cdk/aws-ssm";
-import { v4 as uuidv4 } from "uuid";
+const cdk = require("@aws-cdk/core");
 
-import * as cdk from "@aws-cdk/core";
+const apigateway = require("@aws-cdk/aws-apigateway");
+const lambda = require("@aws-cdk/aws-lambda");
+const lambdaEventSource = require("@aws-cdk/aws-lambda-event-sources");
+const sqs = require("@aws-cdk/aws-sqs");
+const ssm = require("@aws-cdk/aws-ssm");
+
+const { v4: uuidv4 } = require("uuid");
 
 const defaultLambdaConfig = {
   runtime: lambda.Runtime.NODEJS_12_X,
@@ -13,8 +14,8 @@ const defaultLambdaConfig = {
   reservedConcurrentExecutions: 1,
 };
 
-export class StravaWebhookStack extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
+class StravaWebhookStack extends cdk.Stack {
+  constructor(scope, id, props) {
     super(scope, id, props);
 
     const api = new apigateway.RestApi(this, "strava/event", {
@@ -85,15 +86,10 @@ export class StravaWebhookStack extends cdk.Stack {
      * Once this is complete, the requests should only be POSTs.
      * Remove resource unless required for bootstrapping.
      */
-
-    const stravaVerifyToken = uuidv4();
-
-    // Parameter used when creating strava webhook
-    new ssm.StringParameter(this, "Parameter", {
-      description: "This is a test parameter",
-      parameterName: "/strava/verify-token",
-      stringValue: stravaVerifyToken,
-    });
+    const stravaVerifyToken = ssm.StringParameter.valueForStringParameter(
+      this,
+      "/strava/verify-token"
+    );
 
     const stravaWebhookVerifier = new lambda.Function(
       this,
@@ -114,5 +110,16 @@ export class StravaWebhookStack extends cdk.Stack {
         "GET",
         new apigateway.LambdaIntegration(stravaWebhookVerifier)
       );
+
+    /*
+     * Store the useful bits in parameter store
+     */
+    new ssm.StringParameter(this, "strava-api-gateway", {
+      description: "URL assigned to API gateway",
+      parameterName: "/strava/api-gateway-url",
+      stringValue: api.url,
+    });
   }
 }
+
+module.exports = { StravaWebhookStack };
