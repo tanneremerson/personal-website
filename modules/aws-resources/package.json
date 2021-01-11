@@ -8,21 +8,34 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "lint": "eslint . --ext .js"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.81.0",
     "aws-cdk": "1.81.0",
-    "jest": "^26.4.2"
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "jest": "^26.4.2",
+    "prettier": "^2.2.1"
   },
   "dependencies": {
     "@aws-cdk/aws-apigateway": "^1.82.0",
-    "@aws-cdk/aws-lambda": "^1.82.0",
     "@aws-cdk/aws-lambda-event-sources": "^1.82.0",
+    "@aws-cdk/aws-lambda": "^1.82.0",
     "@aws-cdk/aws-sqs": "^1.82.0",
     "@aws-cdk/aws-ssm": "^1.83.0",
     "@aws-cdk/core": "1.82.0",
-    "dotenv": "^8.2.0",
+    "aws-sdk": "^2.824.0",
+    "axios": "^0.21.1",
     "uuid": "^8.3.2"
   }
 }
