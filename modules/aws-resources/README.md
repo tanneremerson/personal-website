@@ -6,18 +6,26 @@ directory.
 
 ## Spinning up new environment
 
-To provision the environment and setup the Strava webhook
+> NOTE: The parameter scripts are not tracked.
+
+The following command will create the parameters required to provision the webhook.
+It will then run the `cdk deploy` command to deploy the infrastructure to AWS. Once the
+infrastructure is up and the endpoint is created, the subscription is created for
+new events with Strava.
 
 ```sh
-./bootstrap/up.js
+npm install
+npm run spinup
 ```
 
 ## Tearing down environment
 
-To tear down the environment, run the down script
+This script will first read and delete all of the subscriptions created with Strava.
+After that `cdk destroy` is run to remove the infrastructure. Once that is removed,
+all of the parameters are deleted.
 
 ```sh
-./bootstrap/down.js
+npm run teardown
 ```
 
 ## Useful CDK Information
