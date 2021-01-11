@@ -1,67 +1,71 @@
-const axios = require("axios");
-
-async function updateAccessToken() {
-  console.log({ msg: "Updating Strava access token" });
-}
+const axios = require('axios');
 
 function baseRequest(params) {
   return {
     baseURL: params.STRAVA_URL,
-    parameters: {
+    params: {
       client_id: params.STRAVA_CLIENT_ID,
       client_secret: params.STRAVA_CLIENT_SECRET,
     },
   };
 }
 
-async function createWebhook(params) {
-  console.log({ msg: "Setting up Strava webhook" });
-
-  const response = await axios({
+async function sendRequest(request, params) {
+  return axios({
     ...baseRequest(params),
-    method: "POST",
-    url: "/push_subscriptions",
+    ...request,
+  })
+    .then((r) => {
+      console.log({ msg: 'Strava Response', response: r.data });
+      return r.data;
+    })
+    .catch((e) => {
+      console.log({
+        msg: 'Something went wrong',
+        headers: e.response.headers,
+        data: e.response.data,
+      });
+      throw new Error('Something went wrong while sending request to Strava');
+    });
+}
+
+async function createWebhook(params) {
+  console.log({ msg: 'Setting up Strava webhook' });
+
+  const request = {
+    method: 'POST',
+    url: '/push_subscriptions',
     params: {
       client_id: params.STRAVA_CLIENT_ID,
       client_secret: params.STRAVA_CLIENT_SECRET,
       callback_url: `${params.API_GATEWAY_URL}strava/event`,
       verify_token: params.STRAVA_VERIFY_TOKEN,
     },
-  })
-    .then((r) => r.data)
-    .catch((error) => {
-      console.log(error.response.data);
-      console.log(error.response.headers);
-      throw new Error("Something went wrong while creating webhook");
-    });
+  };
 
-  console.log({ msg: "Strava Response", response });
-
-  return response;
+  return sendRequest(request, params);
 }
 
 async function readWebhooks(params) {
-  console.log({ msg: "Reading Active Strava webhooks" });
+  console.log({ msg: 'Reading Active Strava webhooks' });
 
-  const response = await axios({
-    ...baseRequest(params),
-    method: "GET",
-    url: "push_subscriptions",
-  });
+  const request = {
+    method: 'GET',
+    url: 'push_subscriptions',
+  };
 
-  console.log({ msg: "Strava Response", response });
+  return sendRequest(request, params);
 }
 
 async function deleteWebhook(params, id) {
-  console.log({ msg: "Deleting up Strava webhook" });
+  console.log({ msg: 'Deleting Strava webhook', id });
 
-  const response = await axios({
-    ...baseRequest(params),
-    method: "DELETE",
+  const request = {
+    method: 'DELETE',
     url: `push_subscriptions/${id}`,
-  });
+  };
 
-  console.log({ msg: "Strava Response", response });
+  return sendRequest(request, params);
 }
 
 module.exports = {

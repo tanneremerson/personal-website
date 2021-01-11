@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 
-const parameters = require("./parameters.js");
-const strava = require("./strava");
+const parameters = require('./parameters.js');
+const strava = require('./strava');
 
 async function main() {
   const params = await parameters.getParameters();
 
-  // TODO: We can get the webhookId from the params once they are set up
-  const webhookId = await strava.deleteWebhook(params, webhookId);
+  const webhookList = await strava.readWebhooks(params);
+
+  const promises = webhookList.map((w) => strava.deleteWebhook(params, w.id));
+
+  await Promise.all(promises);
 }
 
 (async () => {
