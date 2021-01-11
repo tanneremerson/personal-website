@@ -9,7 +9,13 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "lint": "eslint . --ext .js"
+    "lint": "eslint . --ext .js",
+    "prespinup": "./bootstrap/parameters.up.sh",
+    "spinup": "cdk deploy",
+    "postspinup": "./bootstrap/up.js",
+    "preteardown": "./bootstrap/down.js",
+    "teardown": "cdk destroy",
+    "postteardown": "./bootstrap/parameters.down.sh"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.81.0",
@@ -24,6 +30,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "husky": "^4.3.7",
     "jest": "^26.4.2",
     "prettier": "^2.2.1"
   },
@@ -37,5 +44,10 @@
     "aws-sdk": "^2.824.0",
     "axios": "^0.21.1",
     "uuid": "^8.3.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }
