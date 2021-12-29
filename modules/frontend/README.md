@@ -29,3 +29,9 @@ To connect to the database,
 ```bash
 $ pscale connect personal-site
 ```
+
+## Reference
+
+[Vercel CLI](https://vercel.com/docs/cli)
+[Knex Docs](https://knexjs.org/)
+[PScale CLI](https://docs.planetscale.com/reference/planetscale-environment-setup)
