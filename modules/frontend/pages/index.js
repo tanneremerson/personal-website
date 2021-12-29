@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+
 import Footer from "../components/footer";
 import Header from "../components/header";
 import styles from "../styles/Home.module.css";
@@ -12,7 +13,9 @@ export default function Home() {
         <title>Tanner&#39;s World</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <Header />
+
       <main className={styles.main}>
         <h1 className={styles.title}>Hi, I&#39;m Tanner!</h1>
         <div className={styles.grid}>
@@ -60,6 +63,7 @@ export default function Home() {
 
         </div>
       </main>
+
       <Footer />
     </div>
 );
