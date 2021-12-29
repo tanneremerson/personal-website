@@ -4,17 +4,17 @@ import Footer from "../components/footer";
 import Header from "../components/header";
 import styles from "../styles/Home.module.css";
 
+// TODO: Update the favicon
 export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Tanner's World</title>
-        // TODO: Update the favicon
+        <title>Tanner&#39;s World</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
       <main className={styles.main}>
-        <h1 className={styles.title}>Hi, I'm Tanner!</h1>
+        <h1 className={styles.title}>Hi, I&#39;m Tanner!</h1>
         <div className={styles.grid}>
           <Link href="/about">
             <a className={styles.card}>
@@ -29,7 +29,7 @@ export default function Home() {
             <a className={styles.card}>
               <h3>Running &rarr;</h3>
               <p>
-                Read about my running journey and check out my stats. I've got big
+                Read about my running journey and check out my stats. I&#39;ve got big
                 goals for 2021!
               </p>
             </a>
@@ -54,7 +54,7 @@ export default function Home() {
           <Link href="/goals">
             <a className={styles.card}>
               <h3>Goals &rarr;</h3>
-              <p>Interested in what i'm trying to achieve?</p>
+              <p>Interested in what i&#39;m trying to achieve?</p>
             </a>
           </Link>
 

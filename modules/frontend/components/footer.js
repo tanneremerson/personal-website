@@ -1,4 +1,7 @@
+import Image from 'next/image'
+
 import styles from "../styles/Home.module.css";
+
 
 export default function Footer() {
   return (
@@ -9,7 +12,9 @@ export default function Footer() {
         rel="noopener noreferrer"
       >
         Powered by{" "}
-        <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+        <span className={styles.logo}>
+          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+        </span>
       </a>
     </footer>
   );
