@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "knex": "export $(cat .env | sed 1d | xargs) && knex --esm"
+    "knex": "export $(cat .env | sed 1d | xargs) && knex --esm",
+    "dbMigrate": "export $(cat .env | sed 1d | xargs) && knex --esm migrate:latest",
+    "dbRollback": "export $(cat .env | sed 1d | xargs) && knex --esm migrate:rollback"
   },
   "dependencies": {
     "knex": "^0.95.15",
