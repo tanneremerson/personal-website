@@ -1,30 +1,31 @@
 export default {
-  local: {
-    client: 'postgresql',
+  development: {
+    client: 'mysql',
+    asyncStackTraces: true,
     connection: {
-      database: 'personal-site',
-      user:     '',
-      password: ''
+      database: process.env.DB_NAME,
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      // Local does not provide secure connection
+      // ssl: true
     },
     migrations: {
       tableName: 'knex_migrations'
     }
   },
-
   production: {
-    client: 'postgresql',
+    client: 'mysql',
+    asyncStackTraces: true,
     connection: {
-      database: 'personal-site',
-      user:     '',
-      password: ''
-    },
-    pool: {
-      min: 2,
-      max: 10
+      database: process.env.DB_NAME,
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      ssl: true
     },
     migrations: {
       tableName: 'knex_migrations'
     }
-  }
-
+  },
 };
