@@ -1,26 +1,17 @@
 // import knex from 'knex'
+// import dbConfig from '../../knexfile'
 //
-// const connection = knex({
-//   client: 'mysql',
-//   asyncStackTraces: true,
-//   debug: true,
-//   connection: {
-//     database: process.env.DATABASE,
-//     host: process.env.HOST,
-//     user: process.env.USER,
-//     password: process.env.PASSWORD,
-//     ssl: true
-//   }
-// });
-
+// const environmentConfig = dbConfig[process.env.ENV]
+// const connection = knex(environmentConfig);
 
 export default async function handler(_, res) {
-  // try {
-  //   const r = await connection.select('1+1').as('test')
-  //   console.log({ r })
-  // } catch (e) {
-  //   console.log({e})
-  // }
+  let r = []
+  try {
+    r = []
+    // r = await connection.select('*').from('user')
+  } catch (e) {
+    console.log({ e })
+  }
 
-  res.status(200).json({ name: 'John Doe' })
+  res.status(200).json(r)
 }
