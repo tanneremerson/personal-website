@@ -24,7 +24,7 @@ function Card (props) {
     description: 'Learn about the technologies and decisions powering this site.',
  }]
  */
-export default (props) => {
+export default function Grid (props) {
   return(
     <div className={styles.grid}>
       {props.cards.map(card => Card(card))}

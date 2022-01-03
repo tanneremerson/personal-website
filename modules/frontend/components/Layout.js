@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import styles from "../styles/Home.module.css";
 
 // TODO: Update the favicon
-export default (props) => {
+export default function Layout (props) {
   return (
     <div className={styles.container}>
       <Head>
