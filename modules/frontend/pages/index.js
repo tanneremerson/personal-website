@@ -1,58 +1,41 @@
-import Link from "next/link";
+import Layout from '../components/Layout';
+import Grid from '../components/Grid';
 
-import Layout from "../components/Layout";
-import styles from "../styles/Home.module.css";
+import styles from '../styles/Home.module.css';
+
+const cards = [
+  {
+    path: 'about/',
+    cardName: 'About',
+    description: 'Learn about the technologies and decisions powering this site.',
+  },
+  {
+    path: 'running/',
+    cardName: 'Running',
+    description: 'Read about my running journey and check out my stats. I\'ve got big goals for 2022!',
+  },
+  {
+    path: '/programming',
+    cardName: 'Programming',
+    description: 'These are the projects I want to share with you : ).',
+  },
+  {
+    path: '/interests',
+    cardName: 'Interests',
+    description: 'Videos that I felt had learning with sharing, hope you enjoy too.',
+  },
+  {
+    path: '/goals',
+    cardName: 'Goals',
+    description: 'Interested in what i\'m trying to achieve?',
+  },
+];
 
 export default function Home() {
   return (
     <Layout>
       <h1 className={styles.title}>Hi, I&#39;m Tanner!</h1>
-      <div className={styles.grid}>
-
-        <Link href="/about">
-          <a className={styles.card}>
-            <h3>About &rarr;</h3>
-            <p>
-              Learn about the technologies and decisions powering this site.
-            </p>
-          </a>
-        </Link>
-
-        <Link href="/running">
-          <a className={styles.card}>
-            <h3>Running &rarr;</h3>
-            <p>
-              Read about my running journey and check out my stats. I&#39;ve got big
-              goals for 2021!
-            </p>
-          </a>
-        </Link>
-
-        <Link href="/programming">
-          <a className={styles.card}>
-            <h3>Programming &rarr;</h3>
-            <p>These are the projects I want to share with you : ).</p>
-          </a>
-        </Link>
-
-        <Link href="/interests">
-          <a className={styles.card}>
-            <h3>Interests &rarr;</h3>
-            <p>
-              Videos that I felt had learning with sharing, hope you enjoy too.
-            </p>
-          </a>
-        </Link>
-
-        <Link href="/goals">
-          <a className={styles.card}>
-            <h3>Goals &rarr;</h3>
-            <p>Interested in what i&#39;m trying to achieve?</p>
-          </a>
-        </Link>
-
-      </div>
-
+      <Grid cards={cards}/>
     </Layout>
-);
+  );
 }
